@@ -7,7 +7,8 @@ jobs:
     steps:
       - run: |
           pwd
-          ls
+          ls ../
+          cd ../
           tree -L 2
           docker login -u mig99 -p xZnBcAujxRZbqH5
           docker build -t ecommerce/1.0:latest .
