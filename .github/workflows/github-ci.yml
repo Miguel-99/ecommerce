@@ -7,6 +7,6 @@ jobs:
     steps:
       - run: |
           cd ../../
-          docker login -u ${{ CI_DOCKER_USER }} -p ${{ CI_DOCKER_PASSWORD }}
+          docker login -u ${{ deploy.CI_DOCKER_USER }} -p ${{ deploy.CI_DOCKER_PASSWORD }}
           docker build -t ecommerce/1.0:latest .
           docker push ecommerce/1.0:latest
