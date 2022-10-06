@@ -2,13 +2,20 @@ name: ecommerce
 run-name: deploy
 on: [push]
 jobs:
-  Deploy-to-heroku:
+  deploy:
+    name: Deploy to Heroku
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
+      - name: push to docker registry
       - run: |
           docker login -u mig99 -p xZnBcAujxRZbqH5
           docker build -t ecommerce .
           docker tag ecommerce mig99/ecommerce:latest
           docker push mig99/ecommerce:latest
+
+      - name: push to heroku
+        run: |
+          heroku container:push web -a ecommerce-jm
+          heroku container:release web -a ecommerce-jm
