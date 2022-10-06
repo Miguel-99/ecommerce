@@ -8,10 +8,6 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v3
       - run: |
-          pwd
-          ls ../
-          cd ../
-          tree -L 2
           docker login -u mig99 -p xZnBcAujxRZbqH5
           docker build -t ecommerce/1.0:latest .
           docker push ecommerce/1.0:latest
