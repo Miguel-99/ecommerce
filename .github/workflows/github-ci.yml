@@ -6,7 +6,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          cd ../../
+          pwd
+          ls
+          tree -L 2
           docker login -u mig99 -p xZnBcAujxRZbqH5
           docker build -t ecommerce/1.0:latest .
           docker push ecommerce/1.0:latest
