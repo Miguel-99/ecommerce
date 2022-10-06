@@ -2,7 +2,7 @@ name: ecommerce
 run-name: deploy
 on: [push]
 jobs:
-  Deploy-to-heroky:
+  Deploy-to-heroku:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository code
