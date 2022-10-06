@@ -8,8 +8,9 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
+
       - name: push to docker registry
-      - run: |
+        run: |
           docker login -u mig99 -p xZnBcAujxRZbqH5
           docker build -t ecommerce .
           docker tag ecommerce mig99/ecommerce:latest
