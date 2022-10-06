@@ -18,5 +18,8 @@ jobs:
 
       - name: push to heroku
         run: |
+          heroku login -i
+          condori.miguel99@hotmail.com
+          aA!1234459087
           heroku container:push web -a ecommerce-jm
           heroku container:release web -a ecommerce-jm
