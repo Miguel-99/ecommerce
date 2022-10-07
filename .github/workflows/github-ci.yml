@@ -7,13 +7,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check out repository code
       - uses: actions/checkout@v3
-
-      - name: push to docker registry
+      - name: Check out repository code
         env:
           DOCKER_USER: ${{ secrets.CI_DOCKER_USER }}
           DOCKER_PASSWORD: ${{ secrets.CI_DOCKER_PASSWORD }}
+
+      - name: push to docker registry
+
         run: |
           echo $DOCKER_USER
           docker login -u ${ DOCKER_USER } -p ${ DOCKER_PASSWORD }
