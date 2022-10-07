@@ -10,17 +10,17 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v3
         with:
-          DOCKER_USER: mig99
-          DOCKER_PASSWORD: ${{ secrets.CI_DOCKER_PASSWORD }}
+          docker_user: mig99
+          docker_password: ${{ secrets.CI_docker_password }}
 
       - name: push to docker registry
         run: |
-          echo $DOCKER_USER
-          echo $DOCKER_PASSWORD
-          docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+          echo $docker_user
+          echo $docker_password
+          docker login -u $docker_user -p $docker_password
           docker build -t ecommerce .
-          docker tag ecommerce ${DOCKER_USER}/ecommerce:latest
-          docker push ${DOCKER_USER}/ecommerce:latest
+          docker tag ecommerce $docker_user/ecommerce:latest
+          docker push $docker_user/ecommerce:latest
 
       - name: push to heroku
         run: |
