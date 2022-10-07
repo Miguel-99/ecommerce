@@ -15,8 +15,8 @@ jobs:
 
       - name: push to docker registry
         run: |
-          docker login -u ${ DOCKER_USER } -p ${ DOCKER_PASSWORD }
           echo $DOCKER_USER
+          docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
           docker build -t ecommerce .
           docker tag ecommerce ${DOCKER_USER}/ecommerce:latest
           docker push ${DOCKER_USER}/ecommerce:latest
