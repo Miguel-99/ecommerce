@@ -5,22 +5,22 @@ jobs:
   deploy:
     name: Deploy to Heroku
     runs-on: ubuntu-latest
+    env:
+      DOCKER_USER: mig99
+      DOCKER_PASSWORD: ${{ secrets.CI_DOCKER_PASSWORD }}
 
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
-        with:
-          docker_user: mig99
-          docker_password: ${{ secrets.CI_docker_password }}
 
       - name: push to docker registry
         run: |
-          echo $docker_user
-          echo $docker_password
-          docker login -u $docker_user -p $docker_password
+          echo ${DOCKER_USER}
+          echo ${DOCKER_PASSWORD}
+          docker login -u ${DOCKER_USER} -p ${DOCKER_PASSWORD}
           docker build -t ecommerce .
-          docker tag ecommerce $docker_user/ecommerce:latest
-          docker push $docker_user/ecommerce:latest
+          docker tag ecommerce ${DOCKER_USER}/ecommerce:latest
+          docker push ${DOCKER_USER}/ecommerce:latest
 
       - name: push to heroku
         run: |
