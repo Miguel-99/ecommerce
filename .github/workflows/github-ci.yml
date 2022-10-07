@@ -12,14 +12,15 @@ jobs:
         env:
           DOCKER_USER: ${{ secrets.CI_DOCKER_USER }}
           DOCKER_PASSWORD: ${{ secrets.CI_DOCKER_PASSWORD }}
-
-      - name: push to docker registry
         run: |
           echo $DOCKER_USER
           docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
           docker build -t ecommerce .
           docker tag ecommerce ${DOCKER_USER}/ecommerce:latest
           docker push ${DOCKER_USER}/ecommerce:latest
+
+#      - name: push to docker registry
+
 
       - name: push to heroku
         run: |
