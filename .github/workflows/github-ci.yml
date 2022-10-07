@@ -8,7 +8,7 @@ jobs:
 
     steps:
       - name: Check out repository code
-      - uses: actions/checkout@v3
+        uses: actions/checkout@v3
         env:
           DOCKER_USER: ${{ secrets.CI_DOCKER_USER }}
           DOCKER_PASSWORD: ${{ secrets.CI_DOCKER_PASSWORD }}
