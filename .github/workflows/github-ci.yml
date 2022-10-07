@@ -11,11 +11,12 @@ jobs:
         uses: actions/checkout@v3
 
       - name: push to docker registry
-        env:
+        with:
           DOCKER_USER: mig99
           DOCKER_PASSWORD: ${{ secrets.CI_DOCKER_PASSWORD }}
         run: |
           echo $DOCKER_USER
+          echo $DOCKER_PASSWORD
           docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
           docker build -t ecommerce .
           docker tag ecommerce ${DOCKER_USER}/ecommerce:latest
