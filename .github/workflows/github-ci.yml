@@ -15,7 +15,7 @@ jobs:
           DOCKER_USER: ${{ secrets.CI_DOCKER_USER }}
           DOCKER_PASSWORD: ${{ secrets.CI_DOCKER_PASSWORD }}
         run: |
-          docker login -u ${DOCKER_USER} -p ${DOCKER_PASSWORD}
+          docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
           docker build -t ecommerce .
           docker tag ecommerce ${DOCKER_USER}/ecommerce:latest
           docker push ${DOCKER_USER}/ecommerce:latest
