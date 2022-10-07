@@ -12,7 +12,7 @@ jobs:
 
       - name: push to docker registry
         env:
-          DOCKER_USER: ${{ secrets.CI_DOCKER_USER }}
+          DOCKER_USER: mig99
           DOCKER_PASSWORD: ${{ secrets.CI_DOCKER_PASSWORD }}
         run: |
           echo $DOCKER_USER
