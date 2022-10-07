@@ -6,7 +6,7 @@ jobs:
     name: Deploy to Heroku
     runs-on: ubuntu-latest
     env:
-      DOCKER_USER: mig99
+      DOCKER_USER: ${{ secrets.CI_DOCKER_USER }}
       DOCKER_PASSWORD: ${{ secrets.CI_DOCKER_PASSWORD }}
 
     steps:
