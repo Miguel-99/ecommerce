@@ -8,6 +8,8 @@ jobs:
     env:
       DOCKER_USER: ${{ secrets.CI_DOCKER_USER }}
       DOCKER_PASSWORD: ${{ secrets.CI_DOCKER_PASSWORD }}
+#      HEROKU_EMAIL: ${{ secrets.HEROKU_EMAIL }}
+#      HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
 
     steps:
       - name: Check out repository code
@@ -24,8 +26,13 @@ jobs:
 
       - name: push to heroku
         run: |
-          heroku login -i
-          condori.miguel99@hotmail.com
-          aA!1234459087
+          cat > ~/.netrc <<EOF
+            machine api.heroku.com
+            login ${{ secrets.HEROKU_EMAIL }}
+            password ${{ secrets.HEROKU_API_KEY }}
+            machine git.heroku.com
+            login ${{ secrets.HEROKU_EMAIL }}
+            password ${{ secrets.HEROKU_API_KEY }}
+          EOF
           heroku container:push web -a ecommerce-jm
           heroku container:release web -a ecommerce-jm
