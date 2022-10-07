@@ -6,8 +6,8 @@ jobs:
     name: Deploy to Heroku
     runs-on: ubuntu-latest
     env:
-      DOCKER_USER: ${{ CI_DOCKER_USER }}
-      DOCKER_PASSWORD: ${{ CI_DOCKER_PASSWORD }}
+      DOCKER_USER: ${{ secrets.CI_DOCKER_USER }}
+      DOCKER_PASSWORD: ${{ secrets.CI_DOCKER_PASSWORD }}
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
