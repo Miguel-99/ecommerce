@@ -34,5 +34,6 @@ jobs:
             login ${{ secrets.HEROKU_EMAIL }}
             password ${{ secrets.HEROKU_API_KEY }}
           EOF
+          heroku container:login
           heroku container:push web -a ecommerce-jm
           heroku container:release web -a ecommerce-jm
