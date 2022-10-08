@@ -30,4 +30,4 @@ jobs:
           docker build -t ecommerce .
           docker tag ecommerce registry.heroku.com/ecommerce-jm/web
           docker push registry.heroku.com/ecommerce-jm/web
-          heroku container:release web
+          heroku container:release web -a ecommerce-jm
