@@ -20,6 +20,7 @@ jobs:
           echo ${DOCKER_USER}
           echo ${DOCKER_PASSWORD}
           docker login -u ${DOCKER_USER} -p ${DOCKER_PASSWORD}
+          heroku container:login
           docker build -t ecommerce .
           docker tag ecommerce registry.heroku.com/ecommerce-jm/web
           docker push registry.heroku.com/ecommerce-jm/web
