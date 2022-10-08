@@ -17,16 +17,6 @@ jobs:
 
       - name: push to docker registry
         run: |
-          echo ${DOCKER_USER}
-          echo ${DOCKER_PASSWORD}
-          docker login -u ${DOCKER_USER} -p ${DOCKER_PASSWORD}
-          heroku container:login
-          docker build -t ecommerce .
-          docker tag ecommerce registry.heroku.com/ecommerce-jm/web
-          docker push registry.heroku.com/ecommerce-jm/web
-
-      - name: push to heroku
-        run: |
           cat > ~/.netrc <<EOF
             machine api.heroku.com
             login ${{ secrets.HEROKU_EMAIL }}
@@ -36,4 +26,8 @@ jobs:
             password ${{ secrets.HEROKU_API_KEY }}
           EOF
           heroku container:login
+          docker login -u ${DOCKER_USER} -p ${DOCKER_PASSWORD}
+          docker build -t ecommerce .
+          docker tag ecommerce registry.heroku.com/ecommerce-jm/web
+          docker push registry.heroku.com/ecommerce-jm/web
           heroku container:release web
