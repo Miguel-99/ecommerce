@@ -23,6 +23,7 @@ jobs:
           docker build -t ecommerce .
           docker tag ecommerce ${DOCKER_USER}/ecommerce:latest
           docker push ${DOCKER_USER}/ecommerce:latest
+          docker push registry.heroku.com/ecommerce-jm/web
 
       - name: push to heroku
         run: |
@@ -35,5 +36,4 @@ jobs:
             password ${{ secrets.HEROKU_API_KEY }}
           EOF
           heroku container:login
-          heroku container:push web -a ecommerce-jm
-          heroku container:release web -a ecommerce-jm
+          heroku container:release web
