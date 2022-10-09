@@ -13,11 +13,12 @@ repositories {
 }
 
 dependencies {
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.1")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.1")
     implementation("io.javalin:javalin:4.6.4")
     implementation("org.slf4j:slf4j-simple:2.0.1")
     implementation("com.fasterxml.jackson.core:jackson-databind:2.13.3")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.1")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.1")
+    testImplementation("io.rest-assured:rest-assured:5.2.0")
 }
 
 tasks.getByName<Test>("test") {

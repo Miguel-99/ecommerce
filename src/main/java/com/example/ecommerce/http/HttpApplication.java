@@ -1,6 +1,8 @@
 package com.example.ecommerce.http;
 
 import com.example.ecommerce.core.Core;
+import com.example.ecommerce.core.useCases.GetRestaurants;
+import com.example.ecommerce.domain.Restaurant;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
 
@@ -13,6 +15,12 @@ public class HttpApplication {
 
     {
         app.get("/", this::getProducts);
+        app.get("/restaurant", this::getRestaurants);
+    }
+
+    private void getRestaurants(Context ctx) {
+        GetRestaurants.Response restaurants = core.getRestaurants().exec();
+        ctx.json(restaurants);
     }
 
     public void getProducts(Context ctx) {
@@ -27,5 +35,9 @@ public class HttpApplication {
 
     public void start() {
         app.start(port);
+    }
+
+    public void stop() {
+        app.stop();
     }
 }
