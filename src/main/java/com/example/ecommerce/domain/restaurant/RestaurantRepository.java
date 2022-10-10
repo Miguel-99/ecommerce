@@ -1,4 +1,4 @@
-package com.example.ecommerce.domain.Restaurant;
+package com.example.ecommerce.domain.restaurant;
 
 import java.util.List;
 

@@ -1,11 +1,10 @@
 package com.example.ecommerce.core.infrastructure;
 
-import com.example.ecommerce.domain.Restaurant.Restaurant;
-import com.example.ecommerce.domain.Restaurant.RestaurantRepository;
+import com.example.ecommerce.domain.restaurant.Restaurant;
+import com.example.ecommerce.domain.restaurant.RestaurantRepository;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class InMemoryRestaurantRepository implements RestaurantRepository {
     private final List<Restaurant> restaurants = new ArrayList<>();

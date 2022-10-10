@@ -2,10 +2,10 @@ package com.example.ecommerce.core;
 
 import com.example.ecommerce.core.useCases.AddRestaurant;
 import com.example.ecommerce.core.useCases.GetRestaurant;
-import com.example.ecommerce.domain.Product.ProductRepository;
+import com.example.ecommerce.domain.product.ProductRepository;
 import com.example.ecommerce.core.useCases.GetProducts;
 import com.example.ecommerce.core.useCases.GetRestaurants;
-import com.example.ecommerce.domain.Restaurant.RestaurantRepository;
+import com.example.ecommerce.domain.restaurant.RestaurantRepository;
 
 public class Core {
     private final ProductRepository productRepository ;
