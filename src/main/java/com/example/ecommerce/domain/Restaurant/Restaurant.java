@@ -1,4 +1,4 @@
-package com.example.ecommerce.domain;
+package com.example.ecommerce.domain.Restaurant;
 
 public class Restaurant {
     private Long id;

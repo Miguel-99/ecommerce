@@ -1,10 +1,10 @@
 package com.example.ecommerce.http;
 
 import com.example.ecommerce.core.Core;
-import com.example.ecommerce.core.infrastructure.ProductRepository;
-import com.example.ecommerce.domain.InMemoryProductRepository;
-import com.example.ecommerce.domain.InMemoryRestaurantRepository;
-import com.example.ecommerce.domain.RestaurantRepository;
+import com.example.ecommerce.domain.Product.ProductRepository;
+import com.example.ecommerce.core.infrastructure.InMemoryProductRepository;
+import com.example.ecommerce.core.infrastructure.InMemoryRestaurantRepository;
+import com.example.ecommerce.domain.Restaurant.RestaurantRepository;
 
 public class Main {
     public static void main(String[] args) {

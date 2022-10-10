@@ -1,7 +1,7 @@
 package com.example.ecommerce.core.useCases;
 
-import com.example.ecommerce.domain.Restaurant;
-import com.example.ecommerce.domain.RestaurantRepository;
+import com.example.ecommerce.domain.Restaurant.Restaurant;
+import com.example.ecommerce.domain.Restaurant.RestaurantRepository;
 
 import java.util.List;
 

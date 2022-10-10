@@ -1,6 +1,6 @@
-package com.example.ecommerce.domain;
+package com.example.ecommerce.core.infrastructure;
 
-import com.example.ecommerce.core.infrastructure.ProductRepository;
+import com.example.ecommerce.domain.Product.ProductRepository;
 
 import java.util.ArrayList;
 import java.util.List;

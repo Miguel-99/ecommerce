@@ -1,4 +1,4 @@
-package com.example.ecommerce.core.infrastructure;
+package com.example.ecommerce.domain.Product;
 
 import java.util.List;
 
