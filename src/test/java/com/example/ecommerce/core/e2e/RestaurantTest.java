@@ -3,9 +3,11 @@ package com.example.ecommerce.core.e2e;
 import com.example.ecommerce.core.Core;
 import com.example.ecommerce.core.infrastructure.InMemoryProductRepository;
 import com.example.ecommerce.core.infrastructure.InMemoryRestaurantRepository;
+import com.example.ecommerce.core.infrastructure.InMemoryUserRepository;
 import com.example.ecommerce.domain.Product.ProductRepository;
 import com.example.ecommerce.domain.Restaurant.Restaurant;
 import com.example.ecommerce.domain.Restaurant.RestaurantRepository;
+import com.example.ecommerce.domain.User.UserRepository;
 import com.example.ecommerce.http.Env;
 import com.example.ecommerce.http.HttpApplication;
 import org.junit.jupiter.api.AfterEach;
@@ -78,7 +80,8 @@ public class RestaurantTest {
 
     ProductRepository productRepository = new InMemoryProductRepository();
     RestaurantRepository restaurantRepository = new InMemoryRestaurantRepository();
-    Core core = new Core(productRepository, restaurantRepository);
+    UserRepository userRepository = new InMemoryUserRepository();
+    Core core = new Core(productRepository, restaurantRepository, userRepository);
     Env env = new Env();
     Integer PORT = env.getPortOrElse(8080);
     HttpApplication httpApplication = new HttpApplication(PORT, core);

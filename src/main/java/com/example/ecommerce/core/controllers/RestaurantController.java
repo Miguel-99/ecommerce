@@ -7,6 +7,8 @@ import com.example.ecommerce.domain.Restaurant.Restaurant;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
 
+import java.util.NoSuchElementException;
+
 public class RestaurantController {
     private final Javalin app;
     private final Core core;
@@ -17,7 +19,7 @@ public class RestaurantController {
         this.registerEndPoints();
     }
     private void registerEndPoints() {
-        app.get("/restaurant", this::getAll);
+        app.get("/restaurants", this::getAll);
         app.post("/restaurant", this::add);
         app.get("/restaurant/{Id}", this::getById);
     }
@@ -33,7 +35,20 @@ public class RestaurantController {
     }
 
     private void getAll(Context ctx) {
-        GetRestaurants.Response restaurants = core.getRestaurants().exec();
-        ctx.json(restaurants);
+        String authorization = ctx.header("Authorization");
+        if (authorization != null) {
+            try {
+                GetRestaurants.Response restaurants = core.getRestaurants().exec(authorization);
+                ctx.json(restaurants);
+            } catch (NoSuchElementException error) {
+                ctx.json(new ErrorResponse("token incorrecto o expirado"));
+            }
+        }
+        else {
+            ctx.json(new ErrorResponse("no estás autenticado")).status(401);
+        }
     }
+
+    record ErrorResponse(String message){}
+
 }

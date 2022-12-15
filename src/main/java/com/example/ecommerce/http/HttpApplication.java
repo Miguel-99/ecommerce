@@ -19,7 +19,6 @@ public class HttpApplication {
     }
 
     private void init() {
-        app.get("/", this::getProducts);
         new RestaurantController(app, core);
     }
 
