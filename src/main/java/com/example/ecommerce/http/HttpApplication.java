@@ -1,11 +1,9 @@
 package com.example.ecommerce.http;
 
 import com.example.ecommerce.core.Core;
+import com.example.ecommerce.core.controllers.AuthenticationController;
 import com.example.ecommerce.core.controllers.RestaurantController;
 import io.javalin.Javalin;
-import io.javalin.http.Context;
-
-import java.util.List;
 
 public class HttpApplication {
     private final Javalin app = Javalin.create();
@@ -20,12 +18,9 @@ public class HttpApplication {
 
     private void init() {
         new RestaurantController(app, core);
+        new AuthenticationController(app, core);
     }
 
-    public void getProducts(Context ctx) {
-        List<String> products = core.getProducts().exec();
-        ctx.json(products);
-    }
 
     public void start() {
         app.start(port);

@@ -36,10 +36,11 @@ public class RestaurantController {
 
     private void getAll(Context ctx) {
         String authorization = ctx.header("Authorization");
+        System.out.println(authorization);
         if (authorization != null) {
             try {
                 GetRestaurants.Response restaurants = core.getRestaurants().exec(authorization);
-                ctx.json(restaurants);
+                ctx.json(restaurants).status(200);
             } catch (NoSuchElementException error) {
                 ctx.json(new ErrorResponse("token incorrecto o expirado"));
             }

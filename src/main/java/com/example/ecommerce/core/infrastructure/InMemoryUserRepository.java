@@ -2,6 +2,7 @@ package com.example.ecommerce.core.infrastructure;
 
 import com.example.ecommerce.domain.User.User;
 import com.example.ecommerce.domain.User.UserRepository;
+import com.example.ecommerce.domain.User.UserAlreadyExistsError;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +12,10 @@ public class InMemoryUserRepository implements UserRepository {
     private Long id = 1L;
 
     @Override
-    public User save(User user) {
+    public User save(User user) throws UserAlreadyExistsError {
+        if (users.stream().anyMatch(u -> u.getUsername().equalsIgnoreCase(user.getUsername()))) {
+            throw new UserAlreadyExistsError();
+        }
         users.add(user);
         return user;
     }

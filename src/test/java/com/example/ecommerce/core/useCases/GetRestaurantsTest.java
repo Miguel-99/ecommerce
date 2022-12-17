@@ -4,6 +4,7 @@ import com.example.ecommerce.core.infrastructure.InMemoryRestaurantRepository;
 import com.example.ecommerce.core.infrastructure.InMemoryUserRepository;
 import com.example.ecommerce.domain.Restaurant.RestaurantRepository;
 import com.example.ecommerce.domain.User.User;
+import com.example.ecommerce.domain.User.UserAlreadyExistsError;
 import com.example.ecommerce.domain.User.UserRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class GetRestaurantsTest {
     @Test
-    public void getRestaurantsShouldNotThrowException() {
+    public void getRestaurantsShouldNotThrowException() throws UserAlreadyExistsError {
         User user = userRepository.save(new User(userRepository.nextId(), "some username", "some password"));
         user.setSessionId("some session");
 
