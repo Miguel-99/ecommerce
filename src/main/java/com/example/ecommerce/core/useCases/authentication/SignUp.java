@@ -14,11 +14,13 @@ public class SignUp {
         this.tokenGenerator = tokenGenerator;
     }
 
-    public String exec(String username, String password) throws UserAlreadyExistsError {
-        User user = new User(userRepository.nextId(), username, password);
+    public String exec(Request request) throws UserAlreadyExistsError {
+        User user = new User(userRepository.nextId(), request.username, request.password);
         String token = tokenGenerator.generate();
         user.setSessionId(token);
         userRepository.save(user);
         return token;
     }
+
+    public record Request(String username, String password){}
 }

@@ -1,10 +1,14 @@
 package com.example.ecommerce.core.controllers;
 
 import com.example.ecommerce.core.Core;
+import com.example.ecommerce.core.useCases.authentication.Login;
 import com.example.ecommerce.domain.User.InvalidLoginError;
 import com.example.ecommerce.domain.User.UserAlreadyExistsError;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
+
+import static com.example.ecommerce.core.useCases.authentication.SignUp.Request;
+
 
 public class AuthenticationController {
     private final Javalin app;
@@ -21,9 +25,9 @@ public class AuthenticationController {
     }
 
     private void login(Context ctx) {
-        Request request = ctx.bodyAsClass(Request.class);
+        Login.Request request = ctx.bodyAsClass(Login.Request.class);
         try {
-            String token = core.login().exec(request.username, request.password);
+            String token = core.login().exec(request);
             ctx.json(new Response(token));
         } catch (InvalidLoginError error) {
             ctx.json(new ErrorResponse(error.getMessage())).status(400);
@@ -33,7 +37,7 @@ public class AuthenticationController {
     private void signUp(Context ctx) {
         Request request = ctx.bodyAsClass(Request.class);
         try {
-            String token = core.signUp().exec(request.username, request.password);
+            String token = core.signUp().exec(request);
             ctx.json(new Response(token));
         } catch (UserAlreadyExistsError error) {
             ctx.json(new ErrorResponse("nombre de usuario ya existe"));
@@ -41,6 +45,5 @@ public class AuthenticationController {
     }
 
     record ErrorResponse(String message){}
-    record Request(String username, String password){}
     record Response(String token){}
 }

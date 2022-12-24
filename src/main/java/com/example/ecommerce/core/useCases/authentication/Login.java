@@ -14,10 +14,11 @@ public class Login {
         this.tokenGenerator = tokenGenerator;
     }
 
-    public String exec(String username, String password) throws InvalidLoginError {
-        User user = userRepository.getBy(username, password);
+    public String exec(Request request) throws InvalidLoginError {
+        User user = userRepository.getBy(request.username, request.password);
         String token = tokenGenerator.generate();
         user.setSessionId(token);
         return token;
     }
+    public record Request(String username, String password){};
 }
