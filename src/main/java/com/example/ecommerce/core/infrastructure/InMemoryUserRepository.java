@@ -1,5 +1,6 @@
 package com.example.ecommerce.core.infrastructure;
 
+import com.example.ecommerce.domain.User.InvalidLoginError;
 import com.example.ecommerce.domain.User.User;
 import com.example.ecommerce.domain.User.UserRepository;
 import com.example.ecommerce.domain.User.UserAlreadyExistsError;
@@ -44,5 +45,14 @@ public class InMemoryUserRepository implements UserRepository {
                 .filter(user -> user.getSessionId().equals(sessionId))
                 .findFirst()
                 .orElseThrow();
+    }
+
+    @Override
+    public User getBy(String username, String password) throws InvalidLoginError {
+        return users
+                .stream()
+                .filter(user -> user.getUsername().equalsIgnoreCase(username) && user.getPassword().equals(password))
+                .findFirst()
+                .orElseThrow(() -> new InvalidLoginError("El nombre de usuario y/o contraseña son incorrectos"));
     }
 }

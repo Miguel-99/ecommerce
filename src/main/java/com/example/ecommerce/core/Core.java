@@ -1,5 +1,6 @@
 package com.example.ecommerce.core;
 
+import com.example.ecommerce.core.useCases.authentication.Login;
 import com.example.ecommerce.core.useCases.authentication.SignUp;
 import com.example.ecommerce.core.useCases.restaurant.AddRestaurant;
 import com.example.ecommerce.core.useCases.restaurant.GetRestaurant;
@@ -28,5 +29,7 @@ public class Core {
 
     public GetRestaurant getRstaurant() { return new GetRestaurant(restaurantRepository); }
 
-    public SignUp signIn() { return new SignUp(userRepository, tokenGenerator); }
+    public SignUp signUp() { return new SignUp(userRepository, tokenGenerator); }
+
+    public Login login() { return new Login(userRepository, tokenGenerator); }
 }

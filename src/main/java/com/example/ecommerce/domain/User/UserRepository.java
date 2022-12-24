@@ -8,4 +8,5 @@ public interface UserRepository {
     List<User> getAll();
     User getById(Long id);
     User findBySessionId(String session);
+    User getBy(String username, String password) throws InvalidLoginError;
 }
