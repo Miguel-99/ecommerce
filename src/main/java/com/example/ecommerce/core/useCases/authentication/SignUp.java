@@ -1,4 +1,4 @@
-package com.example.ecommerce.core.useCases;
+package com.example.ecommerce.core.useCases.authentication;
 
 import com.example.ecommerce.domain.TokenGenerator.TokenGenerator;
 import com.example.ecommerce.domain.User.User;

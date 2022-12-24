@@ -22,7 +22,7 @@ public class AuthenticationController {
         Request request = ctx.bodyAsClass(Request.class);
         try {
             String token = core.signIn().exec(request.username, request.password);
-            ctx.json(token);
+            ctx.json(new Response(token));
         } catch (UserAlreadyExistsError error) {
             ctx.json(new ErrorResponse("nombre de usuario ya existe"));
         }
@@ -30,4 +30,5 @@ public class AuthenticationController {
 
     record ErrorResponse(String message){}
     record Request(String username, String password){}
+    record Response(String token){}
 }

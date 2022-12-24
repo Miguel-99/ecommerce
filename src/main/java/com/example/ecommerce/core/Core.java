@@ -1,6 +1,9 @@
 package com.example.ecommerce.core;
 
-import com.example.ecommerce.core.useCases.*;
+import com.example.ecommerce.core.useCases.authentication.SignUp;
+import com.example.ecommerce.core.useCases.restaurant.AddRestaurant;
+import com.example.ecommerce.core.useCases.restaurant.GetRestaurant;
+import com.example.ecommerce.core.useCases.restaurant.GetRestaurants;
 import com.example.ecommerce.domain.Product.ProductRepository;
 import com.example.ecommerce.domain.Restaurant.RestaurantRepository;
 import com.example.ecommerce.domain.TokenGenerator.TokenGenerator;

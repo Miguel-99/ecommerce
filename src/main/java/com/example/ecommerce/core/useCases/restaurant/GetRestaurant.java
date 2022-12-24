@@ -1,4 +1,4 @@
-package com.example.ecommerce.core.useCases;
+package com.example.ecommerce.core.useCases.restaurant;
 
 import com.example.ecommerce.domain.Restaurant.Restaurant;
 import com.example.ecommerce.domain.Restaurant.RestaurantRepository;

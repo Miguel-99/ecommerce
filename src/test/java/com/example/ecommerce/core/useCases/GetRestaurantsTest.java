@@ -2,6 +2,7 @@ package com.example.ecommerce.core.useCases;
 
 import com.example.ecommerce.core.infrastructure.InMemoryRestaurantRepository;
 import com.example.ecommerce.core.infrastructure.InMemoryUserRepository;
+import com.example.ecommerce.core.useCases.restaurant.GetRestaurants;
 import com.example.ecommerce.domain.Restaurant.RestaurantRepository;
 import com.example.ecommerce.domain.User.User;
 import com.example.ecommerce.domain.User.UserAlreadyExistsError;
