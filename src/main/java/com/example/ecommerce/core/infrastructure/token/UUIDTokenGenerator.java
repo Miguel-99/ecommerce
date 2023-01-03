@@ -1,4 +1,4 @@
-package com.example.ecommerce.domain;
+package com.example.ecommerce.core.infrastructure.token;
 
 import com.example.ecommerce.domain.TokenGenerator.TokenGenerator;
 

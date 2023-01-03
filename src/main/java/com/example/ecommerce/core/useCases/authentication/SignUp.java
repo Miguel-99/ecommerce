@@ -1,24 +1,24 @@
 package com.example.ecommerce.core.useCases.authentication;
 
+import com.example.ecommerce.core.RepositoryProvider;
 import com.example.ecommerce.domain.TokenGenerator.TokenGenerator;
 import com.example.ecommerce.domain.User.User;
 import com.example.ecommerce.domain.User.UserAlreadyExistsError;
-import com.example.ecommerce.domain.User.UserRepository;
 
 public class SignUp {
-    private final UserRepository userRepository;
-    private TokenGenerator tokenGenerator;
+    private final RepositoryProvider repositories;
+    private final TokenGenerator tokenGenerator;
 
-    public SignUp(UserRepository userRepository, TokenGenerator tokenGenerator) {
-        this.userRepository = userRepository;
+    public SignUp(RepositoryProvider repositories, TokenGenerator tokenGenerator) {
+        this.repositories = repositories;
         this.tokenGenerator = tokenGenerator;
     }
 
     public String exec(Request request) throws UserAlreadyExistsError {
-        User user = new User(userRepository.nextId(), request.username, request.password);
+        User user = new User(repositories.users().nextId(), request.username, request.password);
         String token = tokenGenerator.generate();
         user.setSessionId(token);
-        userRepository.save(user);
+        repositories.users().save(user);
         return token;
     }
 

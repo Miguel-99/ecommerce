@@ -1,4 +1,4 @@
-package com.example.ecommerce.core.infrastructure;
+package com.example.ecommerce.core.infrastructure.persistence.inmemory;
 
 import com.example.ecommerce.domain.Product.ProductRepository;
 

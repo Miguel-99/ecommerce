@@ -25,7 +25,7 @@ public class RestaurantController {
     }
 
     private void getById(Context ctx) {
-        ctx.json(core.getRstaurant().exec(Long.parseLong(ctx.pathParam("Id"))));
+        ctx.json(core.getRestaurant().exec(Long.parseLong(ctx.pathParam("Id"))));
     }
 
     private void add(Context ctx) {

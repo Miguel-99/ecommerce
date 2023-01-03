@@ -5,31 +5,24 @@ import com.example.ecommerce.core.useCases.authentication.SignUp;
 import com.example.ecommerce.core.useCases.restaurant.AddRestaurant;
 import com.example.ecommerce.core.useCases.restaurant.GetRestaurant;
 import com.example.ecommerce.core.useCases.restaurant.GetRestaurants;
-import com.example.ecommerce.domain.Product.ProductRepository;
-import com.example.ecommerce.domain.Restaurant.RestaurantRepository;
 import com.example.ecommerce.domain.TokenGenerator.TokenGenerator;
-import com.example.ecommerce.domain.User.UserRepository;
 
 public class Core {
-    private final ProductRepository productRepository ;
-    private final RestaurantRepository restaurantRepository;
-    private final UserRepository userRepository;
+    private final RepositoryProvider repositories;
     private final TokenGenerator tokenGenerator;
 
-    public Core(ProductRepository productRepository, RestaurantRepository restaurantRepository, UserRepository userRepository, TokenGenerator tokenGenerator) {
-        this.productRepository = productRepository;
-        this.restaurantRepository = restaurantRepository;
-        this.userRepository = userRepository;
+    public Core(RepositoryProvider repositories, TokenGenerator tokenGenerator) {
+        this.repositories = repositories;
         this.tokenGenerator = tokenGenerator;
     }
 
-    public GetRestaurants getRestaurants() { return new GetRestaurants(restaurantRepository, userRepository); }
+    public GetRestaurants getRestaurants() { return new GetRestaurants(repositories); }
 
-    public AddRestaurant addRestaurant() { return new AddRestaurant(restaurantRepository); }
+    public AddRestaurant addRestaurant() { return new AddRestaurant(repositories); }
 
-    public GetRestaurant getRstaurant() { return new GetRestaurant(restaurantRepository); }
+    public GetRestaurant getRestaurant() { return new GetRestaurant(repositories); }
 
-    public SignUp signUp() { return new SignUp(userRepository, tokenGenerator); }
+    public SignUp signUp() { return new SignUp(repositories, tokenGenerator); }
 
-    public Login login() { return new Login(userRepository, tokenGenerator); }
+    public Login login() { return new Login(repositories, tokenGenerator); }
 }

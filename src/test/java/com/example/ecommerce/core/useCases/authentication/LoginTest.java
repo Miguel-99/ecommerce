@@ -1,12 +1,12 @@
 package com.example.ecommerce.core.useCases.authentication;
 
+import com.example.ecommerce.core.RepositoryProvider;
 import com.example.ecommerce.core.domain.TokenGenerator.StubbedTokenGenerator;
-import com.example.ecommerce.core.infrastructure.InMemoryUserRepository;
+import com.example.ecommerce.core.infrastructure.persistence.inmemory.InMemoryRepositoryProvider;
 import com.example.ecommerce.domain.TokenGenerator.TokenGenerator;
 import com.example.ecommerce.domain.User.InvalidLoginError;
 import com.example.ecommerce.domain.User.User;
 import com.example.ecommerce.domain.User.UserAlreadyExistsError;
-import com.example.ecommerce.domain.User.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -19,7 +19,7 @@ public class LoginTest {
     @Test
     public void loginOk() throws InvalidLoginError, UserAlreadyExistsError {
         Login.Request request = new Login.Request("user123", "pass123");
-        userRepository.save(new User(userRepository.nextId(), "user123", "pass123"));
+        repositories.users().save(new User(repositories.users().nextId(), "user123", "pass123"));
 
         String token = login.exec(request);
 
@@ -29,7 +29,7 @@ public class LoginTest {
     @Test
     public void failIfUsernameOrPasswordIncorrect() throws UserAlreadyExistsError{
         Login.Request request = new Login.Request("incorrectUserName", "pass123");
-        userRepository.save(new User(userRepository.nextId(), "user123", "pass123"));
+        repositories.users().save(new User(repositories.users().nextId(), "user123", "pass123"));
 
         assertThrows(InvalidLoginError.class, () -> login.exec(request));
     }
@@ -37,12 +37,10 @@ public class LoginTest {
 
     @BeforeEach
     public void setup(){
-        userRepository = new InMemoryUserRepository();
-        tokenGenerator = new StubbedTokenGenerator(TOKEN_TEST);
-        login = new Login(userRepository, tokenGenerator);
+        login = new Login(repositories, tokenGenerator);
     }
 
     private Login login;
-    private UserRepository userRepository;
-    private TokenGenerator tokenGenerator;
+    private final RepositoryProvider repositories = new InMemoryRepositoryProvider();
+    private final TokenGenerator tokenGenerator = new StubbedTokenGenerator(TOKEN_TEST);
 }

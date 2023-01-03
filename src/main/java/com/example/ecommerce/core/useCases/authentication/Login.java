@@ -1,24 +1,25 @@
 package com.example.ecommerce.core.useCases.authentication;
 
+import com.example.ecommerce.core.RepositoryProvider;
 import com.example.ecommerce.domain.TokenGenerator.TokenGenerator;
 import com.example.ecommerce.domain.User.InvalidLoginError;
 import com.example.ecommerce.domain.User.User;
-import com.example.ecommerce.domain.User.UserRepository;
 
 public class Login {
-    private final UserRepository userRepository;
+    private final RepositoryProvider repositories;
     private final TokenGenerator tokenGenerator;
 
-    public Login(UserRepository userRepository, TokenGenerator tokenGenerator) {
-        this.userRepository = userRepository;
+    public Login(RepositoryProvider repositories, TokenGenerator tokenGenerator) {
+        this.repositories = repositories;
         this.tokenGenerator = tokenGenerator;
     }
 
     public String exec(Request request) throws InvalidLoginError {
-        User user = userRepository.getBy(request.username, request.password);
+        User user = repositories.users().getBy(request.username, request.password);
         String token = tokenGenerator.generate();
         user.setSessionId(token);
         return token;
     }
-    public record Request(String username, String password){};
+
+    public record Request(String username, String password){}
 }

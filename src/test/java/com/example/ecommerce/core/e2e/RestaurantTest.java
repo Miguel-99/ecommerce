@@ -1,17 +1,13 @@
 package com.example.ecommerce.core.e2e;
 
 import com.example.ecommerce.core.Core;
-import com.example.ecommerce.core.infrastructure.InMemoryProductRepository;
-import com.example.ecommerce.core.infrastructure.InMemoryRestaurantRepository;
-import com.example.ecommerce.core.infrastructure.InMemoryUserRepository;
-import com.example.ecommerce.domain.Product.ProductRepository;
+import com.example.ecommerce.core.RepositoryProvider;
+import com.example.ecommerce.core.infrastructure.persistence.inmemory.InMemoryRepositoryProvider;
+import com.example.ecommerce.core.infrastructure.token.UUIDTokenGenerator;
 import com.example.ecommerce.domain.Restaurant.Restaurant;
-import com.example.ecommerce.domain.Restaurant.RestaurantRepository;
 import com.example.ecommerce.domain.TokenGenerator.TokenGenerator;
-import com.example.ecommerce.domain.UUIDTokenGenerator;
 import com.example.ecommerce.domain.User.User;
 import com.example.ecommerce.domain.User.UserAlreadyExistsError;
-import com.example.ecommerce.domain.User.UserRepository;
 import com.example.ecommerce.http.Env;
 import com.example.ecommerce.http.HttpApplication;
 import io.restassured.http.Header;
@@ -26,9 +22,9 @@ import static org.hamcrest.Matchers.equalTo;
 public class RestaurantTest {
     @Test
     public void shouldReturnRestaurants() {
-        Restaurant someRestaurant2 = new Restaurant(restaurantRepository.nextId(), "someName2", "asd 123", "123");
-        restaurantRepository.save(someRestaurant);
-        restaurantRepository.save(someRestaurant2);
+        Restaurant someRestaurant2 = new Restaurant(repositories.restaurants().nextId(), "someName2", "asd 123", "123");
+        repositories.restaurants().save(someRestaurant);
+        repositories.restaurants().save(someRestaurant2);
 
         given()
                 .header(new Header("Authorization", user.getSessionId()))
@@ -43,7 +39,7 @@ public class RestaurantTest {
 
     @Test
     public void shouldReturnSpecificRestaurantById() {
-        restaurantRepository.save(someRestaurant);
+        repositories.restaurants().save(someRestaurant);
         when()
                 .get("/restaurant/1")
         .then()
@@ -57,24 +53,21 @@ public class RestaurantTest {
         httpApplication.start();
 
         user.setSessionId("sessionToken");
-        userRepository.save(user);
+        repositories.users().save(user);
     }
 
     @AfterEach
     void tearDown() {
         httpApplication.stop();
-
     }
 
-    ProductRepository productRepository = new InMemoryProductRepository();
-    RestaurantRepository restaurantRepository = new InMemoryRestaurantRepository();
-    UserRepository userRepository = new InMemoryUserRepository();
+    private RepositoryProvider repositories = new InMemoryRepositoryProvider();
     private TokenGenerator tokenGenerator = new UUIDTokenGenerator();
-    Core core = new Core(productRepository, restaurantRepository, userRepository, tokenGenerator);
-    Env env = new Env();
-    Integer PORT = env.getPortOrElse(8080);
-    HttpApplication httpApplication = new HttpApplication(PORT, core);
-    Restaurant someRestaurant = new Restaurant(restaurantRepository.nextId(), "someName", "someAddress 123", "somePhone123");
-    private User user = new User(userRepository.nextId(), "someUsername", "somePassword");
+    private Core core = new Core(repositories, tokenGenerator);
+    private Env env = new Env();
+    private Integer PORT = env.getPortOrElse(8080);
+    private HttpApplication httpApplication = new HttpApplication(PORT, core);
+    private Restaurant someRestaurant = new Restaurant(repositories.restaurants().nextId(), "someName", "someAddress 123", "somePhone123");
+    private User user = new User(repositories.users().nextId(), "someUsername", "somePassword");
 
 }

@@ -1,10 +1,10 @@
 package com.example.ecommerce.core.useCases.authentication;
 
+import com.example.ecommerce.core.RepositoryProvider;
 import com.example.ecommerce.core.domain.TokenGenerator.StubbedTokenGenerator;
-import com.example.ecommerce.core.infrastructure.InMemoryUserRepository;
+import com.example.ecommerce.core.infrastructure.persistence.inmemory.InMemoryRepositoryProvider;
 import com.example.ecommerce.domain.TokenGenerator.TokenGenerator;
 import com.example.ecommerce.domain.User.UserAlreadyExistsError;
-import com.example.ecommerce.domain.User.UserRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -31,12 +31,10 @@ public class SignUpTest {
 
     @BeforeEach
     public void setup(){
-        userRepository = new InMemoryUserRepository();
-        tokenGenerator = new StubbedTokenGenerator("tokenTest");
-        signUp = new SignUp(userRepository, tokenGenerator);
+        signUp = new SignUp(repositories, tokenGenerator);
     }
 
     private SignUp signUp;
-    private UserRepository userRepository;
-    private TokenGenerator tokenGenerator;
+    private final TokenGenerator tokenGenerator = new StubbedTokenGenerator("tokenTest");
+    private final RepositoryProvider repositories = new InMemoryRepositoryProvider();
 }

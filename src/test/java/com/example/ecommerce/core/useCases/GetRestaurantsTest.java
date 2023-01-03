@@ -1,12 +1,10 @@
 package com.example.ecommerce.core.useCases;
 
-import com.example.ecommerce.core.infrastructure.InMemoryRestaurantRepository;
-import com.example.ecommerce.core.infrastructure.InMemoryUserRepository;
+import com.example.ecommerce.core.RepositoryProvider;
+import com.example.ecommerce.core.infrastructure.persistence.inmemory.InMemoryRepositoryProvider;
 import com.example.ecommerce.core.useCases.restaurant.GetRestaurants;
-import com.example.ecommerce.domain.Restaurant.RestaurantRepository;
 import com.example.ecommerce.domain.User.User;
 import com.example.ecommerce.domain.User.UserAlreadyExistsError;
-import com.example.ecommerce.domain.User.UserRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class GetRestaurantsTest {
     @Test
     public void getRestaurantsShouldNotThrowException() throws UserAlreadyExistsError {
-        User user = userRepository.save(new User(userRepository.nextId(), "some username", "some password"));
+        User user = repositories.users().save(new User(repositories.users().nextId(), "some username", "some password"));
         user.setSessionId("some session");
 
         Assertions.assertDoesNotThrow(() -> {
@@ -33,12 +31,10 @@ public class GetRestaurantsTest {
 
     @BeforeEach
     public void setup() {
-        userRepository = new InMemoryUserRepository();
-        restaurantRepository = new InMemoryRestaurantRepository();
-        getRestaurants = new GetRestaurants(restaurantRepository, userRepository);
+        getRestaurants = new GetRestaurants(repositories);
     }
 
-    private RestaurantRepository restaurantRepository;
-    private UserRepository userRepository;
     private GetRestaurants getRestaurants;
+    private final RepositoryProvider repositories = new InMemoryRepositoryProvider();
+
 }
