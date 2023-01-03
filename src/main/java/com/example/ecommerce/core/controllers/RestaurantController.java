@@ -1,11 +1,13 @@
 package com.example.ecommerce.core.controllers;
 
 import com.example.ecommerce.core.Core;
-import com.example.ecommerce.core.useCases.AddRestaurant;
-import com.example.ecommerce.core.useCases.GetRestaurants;
-import com.example.ecommerce.domain.restaurant.Restaurant;
+import com.example.ecommerce.core.useCases.restaurant.AddRestaurant;
+import com.example.ecommerce.core.useCases.restaurant.GetRestaurants;
+import com.example.ecommerce.domain.Restaurant.Restaurant;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
+
+import java.util.NoSuchElementException;
 
 public class RestaurantController {
     private final Javalin app;
@@ -17,13 +19,13 @@ public class RestaurantController {
         this.registerEndPoints();
     }
     private void registerEndPoints() {
-        app.get("/restaurant", this::getAll);
+        app.get("/restaurants", this::getAll);
         app.post("/restaurant", this::add);
         app.get("/restaurant/{Id}", this::getById);
     }
 
     private void getById(Context ctx) {
-        ctx.json(core.getRstaurant().exec(Long.parseLong(ctx.pathParam("Id"))));
+        ctx.json(core.getRestaurant().exec(Long.parseLong(ctx.pathParam("Id"))));
     }
 
     private void add(Context ctx) {
@@ -33,7 +35,21 @@ public class RestaurantController {
     }
 
     private void getAll(Context ctx) {
-        GetRestaurants.Response restaurants = core.getRestaurants().exec();
-        ctx.json(restaurants);
+        String authorization = ctx.header("Authorization");
+        System.out.println(authorization);
+        if (authorization != null) {
+            try {
+                GetRestaurants.Response restaurants = core.getRestaurants().exec(authorization);
+                ctx.json(restaurants).status(200);
+            } catch (NoSuchElementException error) {
+                ctx.json(new ErrorResponse("token incorrecto o expirado"));
+            }
+        }
+        else {
+            ctx.json(new ErrorResponse("no estás autenticado")).status(401);
+        }
     }
+
+    record ErrorResponse(String message){}
+
 }

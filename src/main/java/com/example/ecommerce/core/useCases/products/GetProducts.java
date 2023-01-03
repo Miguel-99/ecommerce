@@ -1,4 +1,4 @@
-package com.example.ecommerce.core.useCases;
+package com.example.ecommerce.core.useCases.products;
 
 import com.example.ecommerce.domain.product.ProductRepository;
 

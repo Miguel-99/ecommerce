@@ -1,8 +1,9 @@
 package com.example.ecommerce.core.useCases;
 
-import com.example.ecommerce.core.infrastructure.InMemoryRestaurantRepository;
-import com.example.ecommerce.domain.restaurant.Restaurant;
-import com.example.ecommerce.domain.restaurant.RestaurantRepository;
+import com.example.ecommerce.core.RepositoryProvider;
+import com.example.ecommerce.core.infrastructure.persistence.inmemory.InMemoryRepositoryProvider;
+import com.example.ecommerce.core.useCases.restaurant.GetRestaurant;
+import com.example.ecommerce.domain.Restaurant.Restaurant;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -15,8 +16,8 @@ public class GetRestaurantTest {
 
     @Test
     public void getRestaurantByIdShouldNotFail() {
-        Restaurant restaurant = new Restaurant(restaurantRepository.nextId(), "restaurant01", "av123", "123456");
-        restaurantRepository.save(restaurant);
+        Restaurant restaurant = new Restaurant(repositories.restaurants().nextId(), "restaurant01", "av123", "123456");
+        repositories.restaurants().save(restaurant);
         assertDoesNotThrow(() -> getRestaurant.exec(1L));
     }
 
@@ -27,10 +28,10 @@ public class GetRestaurantTest {
 
     @BeforeEach
     public void setup() {
-        restaurantRepository = new InMemoryRestaurantRepository();
-        getRestaurant = new GetRestaurant(restaurantRepository);
+        getRestaurant = new GetRestaurant(repositories);
     }
 
-    private RestaurantRepository restaurantRepository;
     private GetRestaurant getRestaurant;
+    private final RepositoryProvider repositories = new InMemoryRepositoryProvider();
+
 }

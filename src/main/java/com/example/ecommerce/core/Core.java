@@ -1,26 +1,28 @@
 package com.example.ecommerce.core;
 
-import com.example.ecommerce.core.useCases.AddRestaurant;
-import com.example.ecommerce.core.useCases.GetRestaurant;
-import com.example.ecommerce.domain.product.ProductRepository;
-import com.example.ecommerce.core.useCases.GetProducts;
-import com.example.ecommerce.core.useCases.GetRestaurants;
-import com.example.ecommerce.domain.restaurant.RestaurantRepository;
+import com.example.ecommerce.core.useCases.authentication.Login;
+import com.example.ecommerce.core.useCases.authentication.SignUp;
+import com.example.ecommerce.core.useCases.restaurant.AddRestaurant;
+import com.example.ecommerce.core.useCases.restaurant.GetRestaurant;
+import com.example.ecommerce.core.useCases.restaurant.GetRestaurants;
+import com.example.ecommerce.domain.TokenGenerator.TokenGenerator;
 
 public class Core {
-    private final ProductRepository productRepository ;
-    private final RestaurantRepository restaurantRepository;
+    private final RepositoryProvider repositories;
+    private final TokenGenerator tokenGenerator;
 
-    public Core(ProductRepository productRepository, RestaurantRepository restaurantRepository) {
-        this.productRepository = productRepository;
-        this.restaurantRepository = restaurantRepository;
+    public Core(RepositoryProvider repositories, TokenGenerator tokenGenerator) {
+        this.repositories = repositories;
+        this.tokenGenerator = tokenGenerator;
     }
 
-    public GetProducts getProducts() { return new GetProducts(productRepository); }
+    public GetRestaurants getRestaurants() { return new GetRestaurants(repositories); }
 
-    public GetRestaurants getRestaurants() { return new GetRestaurants(restaurantRepository); }
+    public AddRestaurant addRestaurant() { return new AddRestaurant(repositories); }
 
-    public AddRestaurant addRestaurant() { return new AddRestaurant(restaurantRepository); }
+    public GetRestaurant getRestaurant() { return new GetRestaurant(repositories); }
 
-    public GetRestaurant getRstaurant() { return new GetRestaurant(restaurantRepository); }
+    public SignUp signUp() { return new SignUp(repositories, tokenGenerator); }
+
+    public Login login() { return new Login(repositories, tokenGenerator); }
 }
