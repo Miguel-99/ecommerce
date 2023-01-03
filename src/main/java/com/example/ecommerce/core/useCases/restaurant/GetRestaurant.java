@@ -1,10 +1,10 @@
 package com.example.ecommerce.core.useCases.restaurant;
 
 import com.example.ecommerce.core.RepositoryProvider;
-import com.example.ecommerce.domain.Restaurant.Restaurant;
+import com.example.ecommerce.domain.restaurant.Restaurant;
 
 public class GetRestaurant {
-    private RepositoryProvider repositories;
+    private final RepositoryProvider repositories;
 
     public GetRestaurant(RepositoryProvider repositories) {
         this.repositories = repositories;

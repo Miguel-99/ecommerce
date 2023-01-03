@@ -3,7 +3,7 @@ package com.example.ecommerce.core.controllers;
 import com.example.ecommerce.core.Core;
 import com.example.ecommerce.core.useCases.restaurant.AddRestaurant;
 import com.example.ecommerce.core.useCases.restaurant.GetRestaurants;
-import com.example.ecommerce.domain.Restaurant.Restaurant;
+import com.example.ecommerce.domain.restaurant.Restaurant;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
 

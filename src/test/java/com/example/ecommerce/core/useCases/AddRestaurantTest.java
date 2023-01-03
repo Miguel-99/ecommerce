@@ -4,7 +4,6 @@ import com.example.ecommerce.core.RepositoryProvider;
 import com.example.ecommerce.core.infrastructure.persistence.inmemory.InMemoryRepositoryProvider;
 import com.example.ecommerce.core.useCases.restaurant.AddRestaurant;
 import com.example.ecommerce.core.useCases.restaurant.AddRestaurant.Request;
-import com.example.ecommerce.domain.Restaurant.RestaurantRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -30,7 +29,6 @@ public class AddRestaurantTest {
         addRestaurant = new AddRestaurant(repositories);
     }
 
-    private RestaurantRepository restaurantRepository;
     private RepositoryProvider repositories = new InMemoryRepositoryProvider();
     private AddRestaurant addRestaurant;
 }

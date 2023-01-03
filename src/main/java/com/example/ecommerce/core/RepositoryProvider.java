@@ -1,8 +1,8 @@
 package com.example.ecommerce.core;
 
-import com.example.ecommerce.domain.Product.ProductRepository;
-import com.example.ecommerce.domain.Restaurant.RestaurantRepository;
 import com.example.ecommerce.domain.User.UserRepository;
+import com.example.ecommerce.domain.product.ProductRepository;
+import com.example.ecommerce.domain.restaurant.RestaurantRepository;
 
 public interface RepositoryProvider {
     UserRepository users();
