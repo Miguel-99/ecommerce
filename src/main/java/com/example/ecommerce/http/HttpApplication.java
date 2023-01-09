@@ -4,9 +4,14 @@ import com.example.ecommerce.core.Core;
 import com.example.ecommerce.core.controllers.AuthenticationController;
 import com.example.ecommerce.core.controllers.RestaurantController;
 import io.javalin.Javalin;
+import io.javalin.plugin.bundled.CorsPluginConfig;
 
 public class HttpApplication {
-    private final Javalin app = Javalin.create();
+    private final Javalin app = Javalin.create(config -> {
+        config.plugins.enableCors(cors -> {
+            cors.add(CorsPluginConfig::anyHost);
+        });
+    });
     private final Integer port;
     private final Core core;
 
