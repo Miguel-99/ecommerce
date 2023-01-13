@@ -6,9 +6,11 @@ import com.example.ecommerce.core.controllers.RestaurantController;
 import io.javalin.Javalin;
 import io.javalin.plugin.bundled.CorsPluginConfig;
 
+import java.time.LocalDateTime;
+
 public class HttpApplication {
     private final Javalin app = Javalin.create(config -> {
-        config.requestLogger.http((ctx, executionTimeMs) -> System.out.printf("%s %s \n", ctx.method(), ctx.path()));
+        config.requestLogger.http((ctx, executionTimeMs) -> System.out.printf("%s %s %s at %s\n", ctx.method(), ctx.path(), ctx.status(), LocalDateTime.now()));
         config.plugins.enableCors(cors -> {
             cors.add(CorsPluginConfig::anyHost);
         });
