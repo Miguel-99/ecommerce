@@ -40,7 +40,7 @@ public class AuthenticationController {
             String token = core.signUp().exec(request);
             ctx.json(new Response(token));
         } catch (UserAlreadyExistsError error) {
-            ctx.json(new ErrorResponse("nombre de usuario ya existe"));
+            ctx.json(new ErrorResponse("nombre de usuario ya existe")).status(400);
         }
     }
 
