@@ -1,6 +1,6 @@
 package com.example.ecommerce.core.infrastructure.persistence.inmemory;
 
-import com.example.ecommerce.domain.product.ProductRepository;
+import com.example.ecommerce.core.domain.product.ProductRepository;
 
 import java.util.ArrayList;
 import java.util.List;

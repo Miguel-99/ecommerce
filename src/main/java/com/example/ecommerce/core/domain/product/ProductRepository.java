@@ -1,4 +1,4 @@
-package com.example.ecommerce.domain.product;
+package com.example.ecommerce.core.domain.product;
 
 import java.util.List;
 

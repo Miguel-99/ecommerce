@@ -1,7 +1,7 @@
 package com.example.ecommerce.core.infrastructure.persistence.inmemory;
 
-import com.example.ecommerce.domain.restaurant.Restaurant;
-import com.example.ecommerce.domain.restaurant.RestaurantRepository;
+import com.example.ecommerce.core.domain.restaurant.Restaurant;
+import com.example.ecommerce.core.domain.restaurant.RestaurantRepository;
 
 import java.util.ArrayList;
 import java.util.List;

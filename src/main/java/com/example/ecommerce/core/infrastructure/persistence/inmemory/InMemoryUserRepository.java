@@ -1,9 +1,9 @@
 package com.example.ecommerce.core.infrastructure.persistence.inmemory;
 
-import com.example.ecommerce.domain.User.InvalidLoginError;
-import com.example.ecommerce.domain.User.User;
-import com.example.ecommerce.domain.User.UserRepository;
-import com.example.ecommerce.domain.User.UserAlreadyExistsError;
+import com.example.ecommerce.core.domain.User.InvalidLoginError;
+import com.example.ecommerce.core.domain.User.User;
+import com.example.ecommerce.core.domain.User.UserAlreadyExistsError;
+import com.example.ecommerce.core.domain.User.UserRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,9 +13,9 @@ public class InMemoryUserRepository implements UserRepository {
     private Long id = 1L;
 
     @Override
-    public User save(User user) throws UserAlreadyExistsError {
+    public User add(User user) throws UserAlreadyExistsError {
         if (users.stream().anyMatch(u -> u.getUsername().equalsIgnoreCase(user.getUsername()))) {
-            throw new UserAlreadyExistsError();
+            throw new UserAlreadyExistsError(String.format("username '%s' already exists", user.getUsername()));
         }
         users.add(user);
         return user;
@@ -25,17 +25,17 @@ public class InMemoryUserRepository implements UserRepository {
     public Long nextId() { return id++; }
 
     @Override
-    public List<User> getAll() {
-        return users;
-    }
-
-    @Override
     public User getById(Long id) {
         return users
                 .stream()
                 .filter(user -> user.getId().equals(id))
                 .findFirst()
                 .orElseThrow();
+    }
+
+    @Override
+    public User update(User user) {
+        return users.set(users.indexOf(user), user);
     }
 
     @Override

@@ -1,11 +1,12 @@
 package com.example.ecommerce.core;
 
+import com.example.ecommerce.core.domain.TokenGenerator.TokenGenerator;
+import com.example.ecommerce.core.infrastructure.RepositoryProvider;
 import com.example.ecommerce.core.useCases.authentication.Login;
 import com.example.ecommerce.core.useCases.authentication.SignUp;
 import com.example.ecommerce.core.useCases.restaurant.AddRestaurant;
 import com.example.ecommerce.core.useCases.restaurant.GetRestaurant;
 import com.example.ecommerce.core.useCases.restaurant.GetRestaurants;
-import com.example.ecommerce.domain.TokenGenerator.TokenGenerator;
 
 public class Core {
     private final RepositoryProvider repositories;

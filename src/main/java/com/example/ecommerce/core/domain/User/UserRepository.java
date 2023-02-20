@@ -1,12 +1,10 @@
-package com.example.ecommerce.domain.User;
-
-import java.util.List;
+package com.example.ecommerce.core.domain.User;
 
 public interface UserRepository {
-    User save(User user) throws UserAlreadyExistsError;
+    User add(User user) throws UserAlreadyExistsError;
     Long nextId();
-    List<User> getAll();
     User getById(Long id);
+    User update(User user);
     User findBySessionId(String session);
     User getBy(String username, String password) throws InvalidLoginError;
 }

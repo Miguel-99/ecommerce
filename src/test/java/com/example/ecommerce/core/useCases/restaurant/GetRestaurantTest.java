@@ -1,9 +1,8 @@
-package com.example.ecommerce.core.useCases;
+package com.example.ecommerce.core.useCases.restaurant;
 
-import com.example.ecommerce.core.RepositoryProvider;
+import com.example.ecommerce.core.domain.restaurant.Restaurant;
+import com.example.ecommerce.core.infrastructure.RepositoryProvider;
 import com.example.ecommerce.core.infrastructure.persistence.inmemory.InMemoryRepositoryProvider;
-import com.example.ecommerce.core.useCases.restaurant.GetRestaurant;
-import com.example.ecommerce.domain.restaurant.Restaurant;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

@@ -1,4 +1,4 @@
-package com.example.ecommerce.domain.TokenGenerator;
+package com.example.ecommerce.core.domain.TokenGenerator;
 
 public interface TokenGenerator {
     String generate();

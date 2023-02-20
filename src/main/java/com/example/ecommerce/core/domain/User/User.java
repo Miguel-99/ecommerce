@@ -1,4 +1,6 @@
-package com.example.ecommerce.domain.User;
+package com.example.ecommerce.core.domain.User;
+
+import java.util.Objects;
 
 public class User {
     private Long id;
@@ -37,5 +39,18 @@ public class User {
 
     public void setSessionId(String sessionId) {
         this.sessionId = sessionId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return id.equals(user.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

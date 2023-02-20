@@ -1,13 +1,13 @@
 package com.example.ecommerce.core.e2e;
 
 import com.example.ecommerce.core.Core;
-import com.example.ecommerce.core.RepositoryProvider;
+import com.example.ecommerce.core.domain.TokenGenerator.TokenGenerator;
+import com.example.ecommerce.core.domain.User.User;
+import com.example.ecommerce.core.domain.User.UserAlreadyExistsError;
+import com.example.ecommerce.core.domain.restaurant.Restaurant;
+import com.example.ecommerce.core.infrastructure.RepositoryProvider;
 import com.example.ecommerce.core.infrastructure.persistence.inmemory.InMemoryRepositoryProvider;
 import com.example.ecommerce.core.infrastructure.token.UUIDTokenGenerator;
-import com.example.ecommerce.domain.TokenGenerator.TokenGenerator;
-import com.example.ecommerce.domain.User.User;
-import com.example.ecommerce.domain.User.UserAlreadyExistsError;
-import com.example.ecommerce.domain.restaurant.Restaurant;
 import com.example.ecommerce.http.Env;
 import com.example.ecommerce.http.HttpApplication;
 import io.restassured.http.Header;
@@ -53,7 +53,7 @@ public class RestaurantTest {
         httpApplication.start();
 
         user.setSessionId("sessionToken");
-        repositories.users().save(user);
+        repositories.users().add(user);
     }
 
     @AfterEach

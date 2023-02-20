@@ -1,7 +1,7 @@
 package com.example.ecommerce.core.useCases.restaurant;
 
-import com.example.ecommerce.core.RepositoryProvider;
-import com.example.ecommerce.domain.restaurant.Restaurant;
+import com.example.ecommerce.core.domain.restaurant.Restaurant;
+import com.example.ecommerce.core.infrastructure.RepositoryProvider;
 
 public class GetRestaurant {
     private final RepositoryProvider repositories;

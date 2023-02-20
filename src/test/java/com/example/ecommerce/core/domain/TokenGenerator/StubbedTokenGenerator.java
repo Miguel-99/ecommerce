@@ -1,7 +1,5 @@
 package com.example.ecommerce.core.domain.TokenGenerator;
 
-import com.example.ecommerce.domain.TokenGenerator.TokenGenerator;
-
 public class StubbedTokenGenerator implements TokenGenerator {
     private String token;
 
